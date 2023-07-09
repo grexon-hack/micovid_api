@@ -69,12 +69,12 @@ router.post('/login', async (req, res) => {
             })
         }else {
             res.json({
-                message: "user not exist"
+                message: "user not found"
             })
         }
 
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).send("user not found");
 
     }
 
