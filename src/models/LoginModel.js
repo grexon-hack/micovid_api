@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('Tenant', {
+  sequelize.define('Tenants', {
     tenantId: {
         type: DataTypes.UUID,
         primaryKey: true,
@@ -26,11 +26,15 @@ module.exports = (sequelize) => {
         validate: {
             isUrl: true,
         },
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
     
   });
 
-  sequelize.define('TenantSetting', {
+  sequelize.define('TenantSettings', {
     tenantSettingId: {
         type: DataTypes.UUID,
         primaryKey: true,
