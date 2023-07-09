@@ -1,11 +1,11 @@
-// require('dotenv').config();
+require('dotenv').config({path: './.env'});
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const  {DB_USER, DB_PASSWORD, DB_HOST} = require('./tokens/token.js');
+const  {DB_USER, DB_PASSWORD, DB_HOST} = process.env;
 const { Console } = require('console');
 
-const sequelize = new Sequelize('postgres://'+ DB_USER +':'+ DB_PASSWORD +'@'+ DB_HOST +':5432/countries', {
+const sequelize = new Sequelize('postgres://'+ DB_USER +':'+ DB_PASSWORD +'@'+ DB_HOST +':5432/micovidb', {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -29,10 +29,11 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Countries, TouristActivities } = sequelize.models;
+const { Countries, TouristActivities, Tenant, TenantSetting } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+Tenant.hasMany(TenantSetting);
 Countries.belongsToMany(TouristActivities, {through: 'countryTurists'});
 TouristActivities.belongsToMany(Countries, {through: 'countryTurists'})
 
