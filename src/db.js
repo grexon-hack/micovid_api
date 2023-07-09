@@ -1,4 +1,5 @@
 require('dotenv').config({path: './.env'});
+const jwt = require('jsonwebtoken')
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
@@ -29,15 +30,16 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Countries, TouristActivities, Tenant, TenantSetting } = sequelize.models;
+const { Tenants, TenantSettings } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Tenant.hasMany(TenantSetting);
-Countries.belongsToMany(TouristActivities, {through: 'countryTurists'});
-TouristActivities.belongsToMany(Countries, {through: 'countryTurists'})
+Tenants.hasMany(TenantSettings);
+// Countries.belongsToMany(TouristActivities, {through: 'countryTurists'});
+// TouristActivities.belongsToMany(Countries, {through: 'countryTurists'})
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  jwt,
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };
