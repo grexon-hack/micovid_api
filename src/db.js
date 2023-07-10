@@ -1,10 +1,8 @@
 require('dotenv').config({path: './.env'});
-const jwt = require('jsonwebtoken')
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const  {DB_USER, DB_PASSWORD, DB_HOST} = process.env;
-const { Console } = require('console');
 
 const sequelize = new Sequelize('postgres://'+ DB_USER +':'+ DB_PASSWORD +'@'+ DB_HOST +':5432/micovidb', {
   logging: false, // set to console.log to see the raw SQL queries
@@ -35,11 +33,11 @@ const { Tenants, TenantSettings } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 Tenants.hasMany(TenantSettings);
+TenantSettings.belongsTo(Tenants)
 // Countries.belongsToMany(TouristActivities, {through: 'countryTurists'});
 // TouristActivities.belongsToMany(Countries, {through: 'countryTurists'})
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  jwt,
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };
