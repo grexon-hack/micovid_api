@@ -16,12 +16,11 @@ router.post('/', async (req, res) => {
     const { Name, Password } = req.body;
     const dataBd = await Login(Name, Password);
     if(dataBd){
-        const { tenantId ,name, email, image } = dataBd.dataValues;
-        jwt.sign({ tenantId ,name, email, image }, JWT_STRING, {expiresIn: JWT_EXPIRED} , (error, token) => {
+        const { RollSetting : { SportsInstitution } } = dataBd.dataValues;
+        const dataUser = SportsInstitution.dataValues;
+        jwt.sign({ dataUser }, JWT_STRING, {expiresIn: JWT_EXPIRED} , (error, token) => {
           res.json({
-                name,
-                email,
-                image,
+                dataUser,
                 token
             })
         })

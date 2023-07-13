@@ -1,10 +1,10 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Sequelize } = require('sequelize');
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('Tenants', {
-    tenantId: {
+  sequelize.define('SportsInstitutions', {
+    ID: {
         type: DataTypes.UUID,
         primaryKey: true,
         unique:true,
@@ -17,38 +17,72 @@ module.exports = (sequelize) => {
           isEmail: true,
         },
     },
-    name: {
+    institutionName: {
     type: DataTypes.STRING,
     allowNull: false,
+    },
+    legalRepresentative: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    character: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    sede: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    webPage: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     image: {
     type: DataTypes.STRING,
         validate: {
             isUrl: true,
         },
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
     }
     
   });
 
-  sequelize.define('TenantSettings', {
-    tenantSettingId: {
+  sequelize.define('RollSettings', {
+    ID: {
         type: DataTypes.UUID,
         primaryKey: true,
         unique:true,
         allowNull: false
     },
-    tenantId: {
-        type: DataTypes.UUID,
-        allowNull: false
-    },
-    Account: {
+    account: {
     type: DataTypes.ENUM(["User", "Admin", "SuperAdmin"]),
     defaultValue: "User",
     },
+    
+  });
+  
+  sequelize.define('TableLogins', {
+    ID: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        unique:true,
+        allowNull: false
+    },
+    user: {
+    type: DataTypes.STRING,
+    allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
     
   });
 

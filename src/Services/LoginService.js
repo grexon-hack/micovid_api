@@ -1,16 +1,19 @@
-const { Tenants, TenantSettings, jwt } = require('../db.js');
+const { SportsInstitutions, RollSettings, TableLogins } = require('../db.js');
+const CryptoJS = require('crypto-js');
 
 
 const Login = async (Name, Password) => {
-    const CryptoJS = require('crypto-js');
     const { SECRETKEY } = process.env
     const pass = CryptoJS.AES.decrypt(Password, SECRETKEY).toString(CryptoJS.enc.Utf8);
     try {
-        const dataBd = await Tenants.findOne({
+        const dataBd = await TableLogins.findOne({
             where: {
-                name: Name ,
+                user: Name ,
                 password : pass
-            }
+            },
+            include: [
+                {model: RollSettings, include: SportsInstitutions }
+            ]
         });
         
         return dataBd;
