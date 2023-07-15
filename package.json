@@ -43,5 +43,6 @@
     "type": "git",
     "url": "micovid_api"
   },
-  "description": ""
+  "description": "",
+  "keywords": []
 }
