@@ -13,6 +13,7 @@ module.exports = (sequelize) => {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique:true,
         validate: {
           isEmail: true,
         },
@@ -40,6 +41,9 @@ module.exports = (sequelize) => {
     webPage: {
       type: DataTypes.STRING,
       allowNull: true,
+      validate: {
+        isUrl: true,
+      }
     },
     phone: {
       type: DataTypes.STRING,

@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
             })
         })
     }else {
-       res.send("user not found");
+       res.status(401).send("user not found");
     }
 });
 

@@ -1,61 +1,30 @@
 const { Router } = require('express');
-const { v1 } = require('uuid');
-const { SportsInstitutions, RollSettings, TableLogins } = require('../db.js');
-
+const { Register } = require("../Services/RegisterService.js")
+const { conn } = require("../db.js")
 
 const router = Router();
 
 router.post('/', async (req, res) => {
-    const { email, 
-        institutionName,
-        legalRepresentative,
-        character,
-        type,
-        sede,
-        webPage,
-        phone,
-        image,
-        user,
-        password,
-        roll
-    } = req.body;
-
+    const dataFull = {...req.body}
     try {
-        await SportsInstitutions.create({
-            ID: v1(),
-            email,
-            institutionName,
-            legalRepresentative,
-            character,
-            type,
-            sede,
-            webPage,
-            phone,
-            image
-        })
-        .then(SportsInstitutions => {
-           return RollSettings.create({
-                ID: v1(),
-                SportsInstitutionID: SportsInstitutions.ID, 
-                account: roll
-            })
-        })
-        .then(RollSettings => {
-           return TableLogins.create({
-                ID: v1(),
-                user,
-                password,
-                RollSettingID: RollSettings.ID
-            })
-        }).catch(error =>{
-            console.log("error:", error)
-        })
-
+        await Register(dataFull);
         res.status(200).send('was created your activity succesfully')
     }
     catch (error) {
-        res.status(400).send({msg: error})
+        const {parent} = error
+        res.status(400).send({msg: parent.message})
     }
 })
+
+router.get('/planes', async (req, resp) => {
+    try {
+        const result = await conn.query('SELECT * FROM planes'); // Utiliza la conn directamente
+        resp.status(200).json(result[1].rows);
+    } catch (error) {
+        const { parent } = error;
+        resp.status(400).send({ msg: parent.message });
+    }
+});
+
 
 module.exports = router;
