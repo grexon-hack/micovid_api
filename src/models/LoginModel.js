@@ -63,7 +63,7 @@ module.exports = (sequelize) => {
     },
     account: {
     type: DataTypes.ENUM(["User", "Admin", "SuperAdmin"]),
-    defaultValue: "User",
+    defaultValue: "Admin",
     },
     
   });
