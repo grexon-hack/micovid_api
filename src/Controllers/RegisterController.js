@@ -11,7 +11,7 @@ router.post('/', async (req, res) => {
         res.status(200).send('was created your activity succesfully')
     }
     catch (error) {
-        res.status(400).send({msg: 'We have detected an error when registering'})
+        res.status(400).send({msg: `We have detected an error when registering, ${error}`})
     }
 })
 

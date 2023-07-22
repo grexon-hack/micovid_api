@@ -1,14 +1,14 @@
 
 const FormatDate = (numberDay) => {
-    switch (numberDay) {
-        case 0:
+        if(numberDay === 0) {
             const fecha = new Date();
-           return format(fecha)
-        case numberDay != 0:
+            return format(fecha)
+        }
+        else {
             const fechaActual = new Date(); // Fecha actual
             const fechaNueva = new Date(fechaActual.getTime() + numberDay * 24 * 60 * 60 * 1000);
            return format(fechaNueva);
-    }
+        }
 }
 
 const format = (fecha) => {

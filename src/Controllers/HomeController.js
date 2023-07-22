@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken')
 require('dotenv').config({path: '../../.env'});
+const { DataUserPlan } = require("../Services/HomeService.js")
 
 const { verificationToken } = require("../Utils/validateToken.js");
 const { JWT_STRING } = process.env;
@@ -18,5 +19,7 @@ router.post('/', verificationToken, async (req, res) => {
         }
     })
 });
+
+router.post('/:userId', verificationToken, DataUserPlan)
 
 module.exports = router;
