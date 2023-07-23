@@ -1,5 +1,5 @@
 
-const FormatDate = (numberDay) => {
+const formatDate = (numberDay) => {
         if(numberDay === 0) {
             const fecha = new Date();
             return format(fecha)
@@ -19,4 +19,4 @@ const format = (fecha) => {
     return `${año}-${mes}-${dia}`;
 }
 
-module.exports = {FormatDate}
+module.exports = {formatDate}

@@ -1,6 +1,6 @@
 const { PlanUserNames } = require("../db.js")
 
-const DataUserPlan = async (req, res) => {
+const dataUserPlan_function = async (req, res) => {
         const { userId } = req.params;
     try {
         const dataUserPlan = await PlanUserNames.findOne({
@@ -15,4 +15,4 @@ const DataUserPlan = async (req, res) => {
 }
 
 
-module.exports = {DataUserPlan}
+module.exports = {dataUserPlan_function}

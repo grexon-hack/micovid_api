@@ -2,7 +2,7 @@ const { SportsInstitutions, RollSettings, TableLogins } = require('../db.js');
 const CryptoJS = require('crypto-js');
 
 
-const Login = async (Name, Password) => {
+const login_function = async (Name, Password) => {
     const { SECRETKEY } = process.env
     const pass = CryptoJS.AES.decrypt(Password, SECRETKEY).toString(CryptoJS.enc.Utf8);
     try {
@@ -23,5 +23,5 @@ const Login = async (Name, Password) => {
 }
 
 module.exports = {
-    Login
+    login_function
 };
