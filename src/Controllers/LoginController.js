@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config({path: '../../.env'});
 
 
-const { Login } = require("../Services/LoginService.js");
+const { login_function } = require("../Services/LoginService.js");
 
 const { JWT_STRING, JWT_EXPIRED } = process.env;
 const router = Router();
@@ -14,7 +14,7 @@ const router = Router();
 
 router.post('/', async (req, res) => {
     const { Name, Password } = req.body;
-    const dataBd = await Login(Name, Password);
+    const dataBd = await login_function(Name, Password);
     if(dataBd){
         const { RollSetting : { SportsInstitution } } = dataBd.dataValues;
         const dataUser = SportsInstitution.dataValues;

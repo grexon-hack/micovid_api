@@ -4,7 +4,7 @@ const { conn } = require("../db.js")
 require('dotenv').config({path: '../../.env'});
 const { PAYPAL_API, PAYPAL_SECRET_KEY, PAYPAL_CLIENT_ID } = process.env;
 const { PlanUserNames } = require('../db.js');
-const { FormatDate } = require("../Utils/formatDate.js")
+const { formatDate } = require("../Utils/formatDate.js")
 
 const createPayment = async (req, res) => {
     const { amount, currency } = req.body;
@@ -106,8 +106,8 @@ const saveDataCompleted = async (email_address, account_id, account_status, toke
 
         await PlanUserNames.update({
             process: 'COMPLETED',
-            initialDate: FormatDate(0),
-            endDate: FormatDate(dataPlan[0].plantime),
+            initialDate: formatDate(0),
+            endDate: formatDate(dataPlan[0].plantime),
             purchaseIdentifier: account_id,
             email_address_paypal: email_address,
             planId: dataPlan[0].id,

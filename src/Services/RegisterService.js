@@ -4,7 +4,7 @@ require('dotenv').config({path: '../../.env'});
 const { SECRETKEY } = process.env
 const { SportsInstitutions, RollSettings, TableLogins } = require('../db.js');
 
-const Register = async (dataBody) => {
+const register_function = async (dataBody) => {
     const { email, 
         institutionName,
         legalRepresentative,
@@ -50,4 +50,4 @@ const Register = async (dataBody) => {
 
 }
 
-module.exports = {Register}
+module.exports = {register_function}

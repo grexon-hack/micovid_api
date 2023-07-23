@@ -1,27 +1,37 @@
 const { Router } = require('express');
-const { Register } = require("../Services/RegisterService.js")
+const { register_function } = require("../Services/RegisterService.js")
 const { conn } = require("../db.js")
+const { verificationToken } = require("../Utils/validateToken.js")
 
 const router = Router();
 
 router.post('/', async (req, res) => {
     const dataFull = {...req.body}
     try {
-        await Register(dataFull);
-        res.status(200).send('was created your activity succesfully')
+        await register_function(dataFull);
+        const response = {
+            isRegister : true,
+            msg: 'was created your activity succesfully',
+            error: ''
+        }
+        res.status(200).send(response)
     }
     catch (error) {
-        res.status(400).send({msg: 'We have detected an error when registering'})
+        const response = {
+            isRegister : false,
+            msg: 'We have detected an error when registering',
+            error: error
+        }
+        res.status(400).send(response)
     }
 })
 
-router.get('/planes', async (req, resp) => {
+router.get('/planes', verificationToken, async (req, resp) => {
     try {
         const result = await conn.query('SELECT * FROM planes'); // Utiliza la conn directamente
         resp.status(200).json(result[1].rows);
     } catch (error) {
-        const { parent } = error;
-        resp.status(400).send({ msg: parent.message });
+        resp.status(400).send({ msg: `error in the database when trying to bring the plans, ${error}`});
     }
 });
 
