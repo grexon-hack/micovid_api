@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    type: {
+    pais: {
       type: DataTypes.STRING,
       allowNull: false,
     },
