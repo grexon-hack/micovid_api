@@ -1,5 +1,5 @@
 const { v1 } = require('uuid');
-const CryptoJS = require('crypto-js');
+const CryptoTS = require('crypto-ts');
 require('dotenv').config({path: '../../.env'});
 const { SECRETKEY } = process.env
 const { SportsInstitutions, RollSettings, TableLogins } = require('../db.js');
@@ -20,7 +20,7 @@ const register_function = async (dataBody) => {
     } = dataBody;
 
 
-    const pass = CryptoJS.AES.decrypt(password, SECRETKEY).toString(CryptoJS.enc.Utf8);
+    const pass = CryptoTS.AES.decrypt(password, SECRETKEY).toString(CryptoTS.enc.Utf8);
     const sportInstitution = await SportsInstitutions.create({
         ID: v1(),
         email,

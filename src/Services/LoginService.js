@@ -1,10 +1,10 @@
 const { SportsInstitutions, RollSettings, TableLogins } = require('../db.js');
-const CryptoJS = require('crypto-js');
+const { AES, enc } = require('crypto-ts');
 
 
 const login_function = async (Name, Password) => {
     const { SECRETKEY } = process.env
-    const pass = CryptoJS.AES.decrypt(Password, SECRETKEY).toString(CryptoJS.enc.Utf8);
+    const pass = AES.decrypt(Password, enc.Utf8.parse(SECRETKEY)).toString(enc.Utf8);
     try {
         const dataBd = await TableLogins.findOne({
             where: {
