@@ -21,7 +21,7 @@ const createPayment = async (req, res) => {
             landing_page: 'NO_PREFERENCE',
             user_action: 'PAY_NOW',
             return_url: 'http://localhost:3002/payment/capture-payment',
-            cancel_url: 'http://localhost:4200/register'
+            cancel_url: 'http://localhost:4200/plans'
         }
     }
 
@@ -47,7 +47,10 @@ const createPayment = async (req, res) => {
 
         const dataId = href.split("=")[1];
         saveDataApproved(req.body, dataId)
-        res.redirect(href)
+
+        res.status(200).json({
+            url:href
+        })
     }
     catch(error){
         
