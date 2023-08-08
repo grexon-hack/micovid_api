@@ -8,9 +8,10 @@ const router = Router();
 router.post('/', async (req, res) => {
     const dataFull = {...req.body}
     try {
-        await register_function(dataFull);
+      const dataUser =  await register_function(dataFull);
         const response = {
             isRegister : true,
+            dataUser,
             msg: 'was created your activity succesfully',
             error: ''
         }
@@ -26,7 +27,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.get('/planes', verificationToken, async (req, resp) => {
+router.get('/planes', async (req, resp) => {
     try {
         const result = await conn.query('SELECT * FROM planes'); // Utiliza la conn directamente
         resp.status(200).json(result[1].rows);

@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const { createPayment, captureOrder } = require("../Services/PaymentService.js")
 
-router.get('/create-payment', createPayment)
+router.post('/create-payment', createPayment)
 router.get('/capture-payment', captureOrder)
 
 module.exports = router;
