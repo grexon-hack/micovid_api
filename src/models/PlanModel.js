@@ -46,8 +46,7 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE
     },
     purchaseIdentifier: {
-        type: DataTypes.STRING,
-        unique: true
+        type: DataTypes.STRING
     },
     account_status: {
         type: DataTypes.STRING

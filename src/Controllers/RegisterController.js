@@ -8,9 +8,10 @@ const router = Router();
 router.post('/', async (req, res) => {
     const dataFull = {...req.body}
     try {
-        await register_function(dataFull);
+      const dataUser =  await register_function(dataFull);
         const response = {
             isRegister : true,
+            dataUser,
             msg: 'was created your activity succesfully',
             error: ''
         }

@@ -48,6 +48,7 @@ const register_function = async (dataBody) => {
             RollSettingID: rollSetting.ID
         })
 
+        return sportInstitution;
 }
 
 module.exports = {register_function}
