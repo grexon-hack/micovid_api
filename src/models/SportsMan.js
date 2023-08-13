@@ -19,6 +19,22 @@ module.exports = (sequelize) => {
             allowNull: false,
             unique: true,
         },
+        typeIdentification:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        weight:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        category:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        gender:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         nationality: {
             type: DataTypes.STRING,
             allowNull: false,
