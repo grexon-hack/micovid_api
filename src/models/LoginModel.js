@@ -66,9 +66,13 @@ module.exports = (sequelize) => {
         allowNull: false
     },
     account: {
-    type: DataTypes.ENUM(["User", "Admin", "SuperAdmin"]),
+    type: DataTypes.ENUM(["Entrenador", "Admin", "SuperAdmin"]),
     defaultValue: "Admin",
     },
+    usuario:{
+        type: DataTypes.UUID,
+        allowNull: false
+    }
     
   });
   

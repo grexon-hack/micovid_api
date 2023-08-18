@@ -1,4 +1,4 @@
-const { SportsInstitutions, RollSettings, TableLogins } = require('../db.js');
+const { SportsInstitutions, RollSettings, TableLogins,Entrenador } = require('../db.js');
 const { AES, enc } = require('crypto-ts');
 
 
@@ -22,6 +22,21 @@ const login_function = async (Name, Password) => {
     }
 }
 
+const user_function = async (usuario) => {
+   
+    try {
+        const dataBd = await Entrenador.findOne({
+            where: {
+                ID: usuario 
+            }
+        });
+        
+        return dataBd;
+    } catch (error) {
+     return "user not found";
+    }
+}
+
 module.exports = {
-    login_function
+    login_function,user_function
 };
