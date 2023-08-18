@@ -37,7 +37,8 @@ const register_function = async (dataBody) => {
        const rollSetting = await RollSettings.create({
             ID: v1(),
             SportsInstitutionID: sportInstitution.ID, 
-            account: roll
+            account: roll,
+            usuario:sportInstitution.ID
         })
 
 

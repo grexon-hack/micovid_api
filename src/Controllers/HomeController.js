@@ -20,6 +20,6 @@ router.post('/', verificationToken, async (req, res) => {
     })
 });
 
-router.post('/:userId', verificationToken, dataUserPlan_function)
+router.get('/', verificationToken, dataUserPlan_function)
 
 module.exports = router;

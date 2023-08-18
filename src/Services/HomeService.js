@@ -1,10 +1,11 @@
 const { PlanUserNames } = require("../db.js")
 
 const dataUserPlan_function = async (req, res) => {
-        const { userId } = req.params;
+        const { dataUser:{ID,SportsInstitutionID }} = req.user;
+        const sportPlan = SportsInstitutionID === undefined?ID:SportsInstitutionID;
     try {
         const dataUserPlan = await PlanUserNames.findOne({
-            where: {SportsInstitutionID : userId}
+            where: {SportsInstitutionID : sportPlan}
         })
         
         res.status(200).send(dataUserPlan)

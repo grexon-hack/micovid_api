@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes.js');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+require('dotenv').config({path: '../../.env'});
 
 require('./db.js');
 
@@ -21,6 +23,24 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
+});
+
+
+server.use((req, res, next) => {
+  if (req.headers.authorization) {
+    const token = req.headers.authorization.split(' ')[1]; // Obtiene el token del encabezado Authorization
+    try {
+      const decodedToken =jwt.decode(token);
+      // const decodedToken = jwt.verify(token, JWT_STRING);
+      req.user = decodedToken; // Agrega el usuario decodificado al objeto req
+      next();
+    } catch (error) {
+      res.status(401).json({ message: 'Autenticación fallida' });
+    }
+  }else{
+    next();
+  }
+  
 });
 
 server.use('/', routes);
