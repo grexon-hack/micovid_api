@@ -5,6 +5,7 @@ const RegisterRoutes = require("./Controllers/RegisterController.js");
 const HomeRoutes = require("./Controllers/HomeController.js");
 const RoutesPayment = require("./Controllers/PagoController.js");
 const SportManRouter = require("./Controllers/SportManController.js");
+const EntrenadorRouter = require("./Controllers/EntrenadorController.js");
 
 
 const router = Router();
@@ -14,6 +15,7 @@ router.use("/register", RegisterRoutes);
 router.use("/payment", RoutesPayment)
 router.use("/home", HomeRoutes);
 router.use("/sportMan", SportManRouter);
+router.use("/Entrenador", EntrenadorRouter);
 
 
 
